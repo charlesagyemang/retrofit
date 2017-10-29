@@ -20,12 +20,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        String nairaShellingEuroDollarUrl = "GHS,NGN,KES,USD,EUR";
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://min-api.cryptocompare.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         APISERVICE service = retrofit.create(APISERVICE.class);
-        Call<ResponseBody> result = service.getCalls("/data/price?fsym=ETH&tsyms=NGN");
+        Call<ResponseBody> result = service.getCalls("/data/price?fsym=ETH&tsyms=" + nairaShellingEuroDollarUrl);
         result.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
